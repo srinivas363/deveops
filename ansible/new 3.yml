@@ -1,0 +1,9 @@
+- name: test
+  hosts: all
+  vars:
+    flg: y
+  tasks:
+  - copy:
+      src: /etc/passwd
+      dest: /tmp
+    when: flg== "y" 
