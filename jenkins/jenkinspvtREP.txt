@@ -1,0 +1,20 @@
+pipeline{
+    agent any
+    stages{
+        stage("scm"){
+          steps{
+               git branch: 'main', credentialsId: 'gitlogin', url: 'https://github.com/srinivas363/test.git'
+    }
+          }
+		stage("ImageBuild"){
+          steps{
+               sh '''pwd
+                    cd microservices
+                    cp ../app/* .
+                    ls -l
+                    docker build -t image1 .
+					'''
+    }
+ }
+}
+}

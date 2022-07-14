@@ -1,0 +1,26 @@
+pipeline{
+	agent any
+	stages{
+		stage("one"){
+			steps{
+				echo "hello gd mrng"
+					}
+					}
+	    stage("zero"){
+	        parallel {			
+		        stage("two"){
+			        steps{
+				echo "hello testing parallel condition"
+				sleep 15
+					}
+					}
+		        stage("three"){
+			        steps{
+				echo "hi helooo"
+				sleep 15
+					}			
+					}
+					}
+					}
+                	}
+					}

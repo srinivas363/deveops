@@ -1,0 +1,18 @@
+pipeline{
+	agent any
+	stages{
+		stage("1"){
+			steps{
+				sh "echo hi hello how are you"
+				}
+				}
+		}
+	post{
+		success{
+			sh "echo iam good for success"
+		}
+		failure{
+			sh "echo heloo if failure"
+		}
+		}
+		}

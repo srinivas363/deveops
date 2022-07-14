@@ -1,0 +1,19 @@
+pipeline{
+	agent any
+	stages{
+		stage("one"){
+			steps{
+				echo "hello gd mrng"
+					}
+					}
+		stage("two"){    
+			steps{
+				timeout(unit: 'SECONDS', time: 5) {
+				echo "hello testing timeout condition"
+				sh ''' sleep 10 '''
+					}
+					}
+					}
+					}
+					}
+				

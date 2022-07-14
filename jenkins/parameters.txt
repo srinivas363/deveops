@@ -1,0 +1,32 @@
+pipeline{
+	agent any
+	parameters{
+		string(name: 'srinu')
+	}
+	stages{
+		stage("one"){
+			steps{
+			  echo "${srinu}"
+			  }
+		}
+		}
+	}
+========================================================================================
+pipeline{
+	agent any
+	parameters{
+		string(name: 'srinu')
+		choice(name: 'branches', choices: ['main', 'b1', 'b2']) 
+		}
+	stages{
+		stage("one"){
+			steps{
+			 git branch: "${branches}", url: 'https://github.com/srinivas363/test.git'
+			 sh''' echo "${srinu}"
+			  echo "${branches}"
+			  '''
+			  }
+		}
+		}
+		}
+		

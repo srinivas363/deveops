@@ -1,0 +1,18 @@
+pipeline{
+	agent any
+	parameters{
+		string(name: 'abc')
+	}
+	environment{
+		name= 'srinivas'
+		}
+	stages{
+		stage("one"){
+			steps{
+			echo "my name is $name"
+			echo "my name is $abc"
+			}
+			}
+			}
+			}
+		

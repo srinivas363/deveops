@@ -1,0 +1,18 @@
+pipeline{
+	agent any
+	stages{
+		stage("one"){
+			steps{
+				echo "hello gd mrng"
+					}
+					}
+	    stage("two"){
+		    input {
+                message 'input'
+                    }
+			steps{
+				echo "hello testing parallel condition"
+					}
+					}
+					}
+					}

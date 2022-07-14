@@ -1,0 +1,109 @@
+pipeline{
+    agent any
+    stages{
+        stage("scm"){
+          steps{
+               git branch: 'main', credentialsId: 'gitlogin', url: 'https://github.com/srinivas363/test.git'
+    }
+          }
+		stage("ImageBuild"){
+          steps{
+               sh '''pwd
+                    cd microservices
+                    cp ../app/* .
+                    ls -l
+                    docker build -t docker.io/srinivas363/nbapp:v${BUILD_NUMBER} .
+                    docker images
+					'''
+          }
+		}
+        stage("ImagePush"){
+          steps{
+              withCredentials([usernamePassword(credentialsId: 'doclog', passwordVariable: 'dpasswd', usernameVariable: 'duser')]) {
+                 sh '''
+                  docker login -u $duser -p $dpasswd
+                  docker push srinivas363/nbapp:v${BUILD_NUMBER}
+					'''
+              }
+              }
+              }
+        stage("k8s"){
+          steps{
+              withCredentials([file(credentialsId: 'pvtkey', variable: 'key')]) {
+             sh """
+             cd microservices
+             cat pod.yml
+             sed -i "s/nginx/docker.io\\/srinivas363\\/nbapp:v${BUILD_NUMBER}/g" pod.yml
+             scp -i $key -o StrictHostKeyChecking=no pod.yml ubuntu@172.31.1.94:/home/ubuntu
+             cat pod.yml"""
+    }
+          }
+ }
+ }
+}
+=========================================================================================================================================
+pipeline{
+    agent any
+    stages{
+        stage("scm"){
+          steps{
+               git branch: 'main', credentialsId: 'gitlogin', url: 'https://github.com/srinivas363/sai.git'
+    }
+}
+}
+}
+=========================================================================================================================================
+pipeline{
+    agent any
+    stages{
+        stage("scm"){
+          steps{
+               git branch: 'main', credentialsId: 'gitlogin', url: 'https://github.com/srinivas363/test.git'
+    }
+          }
+		stage("ImageBuild"){
+          steps{
+               sh '''pwd
+                    cd microservices
+                    cp ../app/* .
+                    ls -l
+                    docker build -t docker.io/srinivas363/nbapp:v${BUILD_NUMBER} .
+                    docker images
+					'''
+          }
+		}
+        }
+        }
+=========================================================================================================================================
+pipeline{
+    agent any
+    stages{
+        stage("scm"){
+          steps{
+               git branch: 'main', credentialsId: 'gitlogin', url: 'https://github.com/srinivas363/test.git'
+    }
+          }
+		stage("ImageBuild"){
+          steps{
+               sh '''pwd
+                    cd microservices
+                    cp ../app/* .
+                    ls -l
+                    docker build -t docker.io/srinivas363/nbapp:v${BUILD_NUMBER} .
+                    docker images
+					'''
+          }
+		}
+        stage("ImagePush"){
+          steps{
+              withCredentials([usernamePassword(credentialsId: 'doclog', passwordVariable: 'dpasswd', usernameVariable: 'duser')]) {
+                 sh '''
+                  docker login -u $duser -p $dpasswd
+                  docker push srinivas363/nbapp:v${BUILD_NUMBER}
+					'''
+              }
+              }
+              }
+          }
+ }
+=========================================================================================================================================

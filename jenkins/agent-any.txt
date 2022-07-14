@@ -1,0 +1,24 @@
+pipeline{
+	agent any
+	parameters{
+		choice(name: 'branch',choices['main','b1','b2'])
+		}
+	stages{
+		stage("one"){
+			steps{
+				echo "hello gd mrng"
+					}
+					}
+		stage("two"){
+			when { expression { branch 'main' } }
+			steps{
+				echo "hello testing when condition"
+					}
+					}
+					}
+					}
+					
+					
+					
+					n1
+				    Built-In Node

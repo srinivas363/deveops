@@ -1,0 +1,24 @@
+pipeline{
+	agent any
+	parameters{
+		choice(name: 'branch',choices:['main','b1','b2'])
+		}
+	stages{
+		stage("one"){
+			steps{
+				echo "hello gd mrng"
+					}
+					}
+		stage("two"){
+			when { expression 
+			{
+			return  branch=='main' }
+			}
+			steps{
+				git branch: '${branch}', url: 'https://github.com/srinivas363/new.git'
+				echo "hello testing when condition"
+					}
+					}
+					}
+					}
+				
