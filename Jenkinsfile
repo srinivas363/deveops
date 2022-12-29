@@ -12,7 +12,7 @@ pipeline{
 			}
 		stage("two"){
 			steps{
-			sh 'echo iam good'
+			sh 'echo iam good how are you'
 			}
 			}
 			}
